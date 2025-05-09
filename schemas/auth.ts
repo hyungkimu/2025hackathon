@@ -33,3 +33,34 @@ export const LoginSchema = z.object({
     message: "패스워드를 입력해주세요.",
   }),
 });
+
+export const UserLoginSchema = z.object({
+  name: z
+    .string()
+    .min(1, { message: "이름을 입력해주세요." })
+    .regex(/^[a-zA-Zㄱ-ㅎ가-힣]+$/, {
+      message: "이름은 문자만 입력할 수 있습니다.",
+    }),
+  id: z.string().regex(/^\d{8}$/, {
+    message: "아이디는 8자리의 숫자여야 합니다.",
+  }),
+});
+
+export const ManagerInsertSchema = z.object({
+  name: z
+    .string()
+    .min(1, { message: "이름을 입력해주세요." })
+    .regex(/^[a-zA-Zㄱ-ㅎ가-힣]+$/, {
+      message: "이름은 문자만 입력할 수 있습니다.",
+    }),
+  id: z.string().regex(/^\d{8}$/, {
+    message: "아이디는 정확히 8자리의 숫자여야 합니다.",
+  }),
+  elderPhone: z.string().regex(/^\d{11}$/, {
+    message: "전화번호는 11자리 숫자여야 합니다.",
+  }),
+  guardPhone: z.string().regex(/^\d{11}$/, {
+    message: "보호자 전화번호는 11자리 숫자여야 합니다.",
+  }),
+  elderadress: z.string().min(1, { message: "주소를 입력해주세요." }),
+});

@@ -4,7 +4,20 @@ export type TSignUpFormError = {
   password?: string[];
 };
 
-export type TLoginFormError = {
+export type TManagerLoginFormError = {
   email?: string[];
   password?: string[];
+};
+
+export type TUserLoginFormError = {
+  id?: string[];
+  name?: string[];
+};
+
+export type TRegistFormError = {
+  name?: string[];
+  id?: string[];
+  elderPhone?: string[];
+  guardPhone?: string[];
+  elderadress?: string[];
 };

@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Naduri_B";
+  font-weight: 500;
+  src: url("/fonts/Hakgyoansim Nadeuri TTF B.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Naduri_L";
+  font-weight: 400;
+  src: url("/fonts/Hakgyoansim Nadeuri TTF L.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Geurimilgi";
+  font-weight: 500;
+  src: url("/fonts/Hakgyoansim Geurimilgi TTF R.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Dagyeong";
+  font-weight: 400;
+  src: url("/fonts/Ownglyph_2022_UWY_Da_Gyeong-Rg.ttf") format("truetype");
+}
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;

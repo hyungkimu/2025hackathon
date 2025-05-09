@@ -9,6 +9,7 @@ const encodedKey = new TextEncoder().encode(secretKey);
 type SessionPayload = {
   id: string;
   name: string;
+  role: "manager" | "user";
 };
 
 export const encrypt = async (payload: SessionPayload) => {
@@ -35,7 +36,6 @@ export const createSession = async (payload: SessionPayload) => {
   const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
   const session = await encrypt(payload);
 
-
   cookies().set("session", session, {
     httpOnly: true,
     secure: true,
@@ -47,7 +47,6 @@ export const createSession = async (payload: SessionPayload) => {
 
 export const deleteSession = () => {
   cookies().delete("session");
-
 };
 
 export const verifySession = async () => {
@@ -56,7 +55,7 @@ export const verifySession = async () => {
   const session = await verify(cookie);
 
   if (!session?.id) {
-    redirect("/login");
+    redirect("/managerlogin");
   }
 
   return session;

@@ -1,6 +1,6 @@
 "use server";
 import bcrypt from "bcryptjs";
-import { getUserByEmail } from "@/data/user";
+import { getAdminByEmail } from "@/data/user";
 import { LoginSchema } from "@/schemas/auth";
 import { createSession } from "./sessions";
 import { redirect } from "next/navigation";
@@ -21,7 +21,7 @@ export const login = async (_: any, formData: FormData) => {
   const { email, password } = validatedFields.data;
 
   try {
-    const existingUser = await getUserByEmail(email);
+    const existingUser = await getAdminByEmail(email);
 
     if (!existingUser) {
       return {
@@ -39,7 +39,7 @@ export const login = async (_: any, formData: FormData) => {
     }
 
     // 세션 생성
-    await createSession({ id, name });
+    await createSession({ id, name, role: "manager" });
   } catch (error) {
     console.error("error", error);
     return {
@@ -47,5 +47,5 @@ export const login = async (_: any, formData: FormData) => {
     };
   }
 
-  redirect("/");
+  redirect("/manager/main");
 };
