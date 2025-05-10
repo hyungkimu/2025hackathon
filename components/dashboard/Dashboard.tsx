@@ -9,6 +9,7 @@ type Props = {
   user: {
     name: string;
     id: string;
+    seniorId: string;
     number: string;
     number_p: string;
     home: string;
