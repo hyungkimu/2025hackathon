@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     n: 1,
   });
 
-  const imageUrl = image.data[0].url;
+  const imageUrl = (image.data as { url: string }[])[0].url;
 
   console.log(imageUrl);
 
