@@ -35,7 +35,7 @@ export default function Elder({ Info }: { Info: Props[] }) {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {Info.map((item, index) => (
-            <Link key={index} href={`/diary`}>
+            <Link key={index} href={`/diary/${item.id}`}>
               <div className="flex flex-col items-center cursor-pointer">
                 <Avatar className="flex h-[8em] w-[8em]">
                   <AvatarImage src="/logo.png" alt="@shadcn" />

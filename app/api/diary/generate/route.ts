@@ -74,7 +74,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Diary not found" }, { status: 404 });
   }
 
-  // ✅ 메시지 저장
   const messagesToInsert = history.map((msg: any) => ({
     diaryId,
     role: msg.role,

@@ -32,12 +32,12 @@ export const userlogin = async (_: any, formData: FormData) => {
       id: existingUser.id,
       name: existingUser.name,
       role: "user",
+      email: "",
     });
+
+    redirect(`./diary/${existingUser.id}`);
   } catch (err) {
     console.error(err);
     return { errorMessage: "로그인 중 문제가 발생했습니다." };
   }
-
-  // 5) 로그인 성공 시 리다이렉트
-  redirect("/user/main");
 };

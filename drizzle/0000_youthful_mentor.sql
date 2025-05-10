@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS "diary" (
 	"senior_id" uuid NOT NULL,
 	"title" text,
 	"image_url" text,
+	"content": text,
 	"risk" integer,
 	"created_at" date DEFAULT now(),
 	CONSTRAINT "diary_senior_id_created_at_unique" UNIQUE("senior_id","created_at")

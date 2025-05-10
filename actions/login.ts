@@ -39,7 +39,7 @@ export const login = async (_: any, formData: FormData) => {
     }
 
     // 세션 생성
-    await createSession({ id, name, role: "manager" });
+    await createSession({ id, name, email, role: "manager" });
   } catch (error) {
     console.error("error", error);
     return {
@@ -47,5 +47,5 @@ export const login = async (_: any, formData: FormData) => {
     };
   }
 
-  redirect("/manager/main");
+  redirect("/manager");
 };

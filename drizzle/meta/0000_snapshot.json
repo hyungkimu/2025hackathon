@@ -76,6 +76,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
         "risk": {
           "name": "risk",
           "type": "integer",

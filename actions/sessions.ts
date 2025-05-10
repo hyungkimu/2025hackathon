@@ -9,6 +9,7 @@ const encodedKey = new TextEncoder().encode(secretKey);
 type SessionPayload = {
   id: string;
   name: string;
+  email: string;
   role: "manager" | "user";
 };
 

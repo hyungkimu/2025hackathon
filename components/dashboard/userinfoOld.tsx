@@ -33,7 +33,7 @@ export function UserInfo({ user }: { user: Props }) {
           </div>
           <div className="flex">
             <p className=" ml-2 mt-2 text-sm text-muted-foreground">
-              아이디 : {user.id} |{" "}
+              아이디 : {user.seniorId} |{" "}
             </p>
             <p className="text-sm mt-2 text-muted-foreground ml-3">
               주소 : {user.home}{" "}

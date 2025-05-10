@@ -53,9 +53,7 @@ export async function middleware(request: NextRequest) {
   }
   if (isUserPublic && role === "user") {
     const userId = session.id; // 세션에 실제 userId가 있어야 함
-    return NextResponse.redirect(
-      new URL(`/user/${userId}/speech`, request.url)
-    );
+    return NextResponse.redirect(new URL(`/diary/${userId}`, request.url));
   }
 
   return NextResponse.next();

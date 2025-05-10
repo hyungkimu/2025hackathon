@@ -5,7 +5,13 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { format, isSameDay } from "date-fns";
 
-export function CalendarDemo({ availableDates }: { availableDates: string[] }) {
+export function CalendarDemo({
+  seniorId,
+  availableDates,
+}: {
+  seniorId: string;
+  availableDates: string[];
+}) {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const router = useRouter();
 
@@ -15,14 +21,12 @@ export function CalendarDemo({ availableDates }: { availableDates: string[] }) {
     if (selectedDate) {
       const formatted = format(selectedDate, "yyyy-MM-dd");
 
-      // 해당 날짜에 일기가 있으면만 이동
       if (availableDates.includes(formatted)) {
-        router.push(`/diary/${formatted}`);
+        router.push(`/diary/${seniorId}/${formatted}`);
       }
     }
   };
 
-  // ❌ 비활성화할 날짜를 만들어서 전달
   const disabledDates = (day: Date) => {
     const dayStr = format(day, "yyyy-MM-dd");
     return !availableDates.includes(dayStr);

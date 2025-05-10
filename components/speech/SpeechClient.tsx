@@ -73,14 +73,18 @@ export default function SpeechClient({
         const imageForm = new FormData();
         imageForm.append("spokenSummary", spokenSummary);
         imageForm.append("diaryId", diaryId);
-        const image = await fetch("/api/image", {
+        imageForm.append("userId", userId);
+        await fetch("/api/diary/image", {
           method: "POST",
           body: imageForm,
         });
 
-        const { imageUrl } = await image.json();
+        // 결과 페이지로 이동 (다이어리 날짜와 사용자 ID를 사용)
+        const router = useRouter();
+        const dateStr = format(new Date(history[0].createdAt), "yyyy-MM-dd"); // 또는 서버에서 받은 날짜 사용
+        router.push(`/diary/${userId}/${dateStr}`); // 날짜 경로로 리다이렉트
 
-        // 결과 페이지로 이동, 쿼리로 넘기거나 전역 상태 활용
+        // 결과 페이지로 이동 <<
       } catch (e) {
         console.error("그림일기 생성 실패:", e);
         alert("그림일기를 만드는 중 문제가 생겼어요.");
