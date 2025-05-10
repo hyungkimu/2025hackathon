@@ -1,4 +1,4 @@
-import { BASE_URL } from "@/constants/routes";
+// import { BASE_URL } from "@/constants/routes";
 import Image from "next/image";
 import Link from "next/link";
 

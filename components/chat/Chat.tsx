@@ -9,7 +9,6 @@ import { Button } from "../ui/button";
 import { ArrowUp } from "lucide-react";
 import { useModelStore } from "@/store/model";
 import { useParams, useRouter } from "next/navigation";
-import { addMessages, createConversation } from "@/actions/conversation";
 import { CHAT_ROUTES } from "@/constants/routes";
 import { useUserStore } from "@/store/user";
 
@@ -27,15 +26,14 @@ export function Chat({ initialMessages }: Props) {
         // param -> conversationId가 없으면 새로운 대화 페이지
         if (!params.conversationId) {
           // 1. create conversation
-          const conversation = await createConversation(input);
+          //const conversation = await createConversation(input);
           // 2. add messages
-          await addMessages(conversation.id, input, message.content);
-
-          router.push(`${CHAT_ROUTES.CONVERSATIONS}/${conversation.id}`);
+          //await addMessages(conversation.id, input, message.content);
+          //router.push(`${CHAT_ROUTES.CONVERSATIONS}/${conversation.id}`);
         } else {
           // param -> conversationId가 있으면 기존 대화페이지
           // 1. add messages
-          await addMessages(params.conversationId, input, message.content);
+          //await addMessages(params.conversationId, input, message.content);
         }
       },
     });

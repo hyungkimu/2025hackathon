@@ -5,6 +5,7 @@ import { DropdownMenuDemo } from "./DropDown";
 type Props = {
   name: string;
   id: string;
+  seniorId: string;
   number: string;
   number_p: string;
   home: string;

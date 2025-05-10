@@ -20,10 +20,8 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useSheetStore } from "@/store/sheet";
 import toast from "react-hot-toast";
-import { deleteConversation, updateConversation } from "@/actions/conversation";
 import { useModalStore } from "@/store/modal";
 import { ModalFooter } from "../modal/ModalFooter";
-import { BASE_URL } from "@/constants/routes";
 
 type Props = {
   item: {
@@ -68,7 +66,7 @@ export function SidebarItem({ item }: Props) {
     setIsEditMode(false);
     if (value !== label) {
       try {
-        await updateConversation(id, value);
+        // await updateConversation(id, value);
       } catch (error) {
         console.error(error);
         toast.error("이름 수정에 실패하였습니다.");
@@ -78,12 +76,12 @@ export function SidebarItem({ item }: Props) {
 
   const handleDelete = async () => {
     try {
-      await deleteConversation(id);
+      // await deleteConversation(id);
 
       toast.success("삭제에 성공했습니다.");
 
       if (params.conversationId === id) {
-        router.push(BASE_URL);
+        // router.push(BASE_URL);
       }
 
       closeModal();
