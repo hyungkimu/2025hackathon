@@ -10,7 +10,7 @@ import { ArrowUp } from "lucide-react";
 import { useModelStore } from "@/store/model";
 import { useParams, useRouter } from "next/navigation";
 import { CHAT_ROUTES } from "@/constants/routes";
-import { useUserStore } from "@/store/user";
+// import { useUserStore } from "@/store/user";
 
 type Props = {
   initialMessages?: TMessage[];
@@ -19,7 +19,7 @@ type Props = {
 export function Chat({ initialMessages }: Props) {
   const router = useRouter();
   const params = useParams<{ conversationId: string }>();
-  const user = useUserStore((state) => state.user);
+  // const user = useUserStore((state) => state.user);
   const { messages, setMessages, input, handleInputChange, handleSubmit } =
     useChat({
       onFinish: async (message) => {
@@ -63,7 +63,7 @@ export function Chat({ initialMessages }: Props) {
             {messages.map((message) => (
               <Message
                 key={message.id}
-                name={user.name}
+                // name={user.name}
                 content={message.content}
                 role={message.role}
               />
