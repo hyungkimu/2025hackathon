@@ -54,7 +54,7 @@ export default async function DiaryPage({
 
   const chat = diaryEntry.messages.map((msg) => ({
     id: msg.id,
-    sender: msg.role === "user" ? "me" : "other",
+    sender: msg.role === "user" ? ("me" as const) : ("other" as const),
     message: msg.content,
   }));
 
@@ -71,8 +71,8 @@ export default async function DiaryPage({
       : "",
     title: diaryEntry.title || "",
     image_url: diaryEntry.imageUrl || "/diary.jpg",
-    content: diaryEntry.content,
-    chat,
+    content: diaryEntry.content ?? "",
+    chat: chat,
   };
 
   return <DrawCard diaryData={[cardData]} />;

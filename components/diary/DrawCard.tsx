@@ -13,7 +13,7 @@ export type DiaryItem = {
   date: string;
   image_url: string;
   title: string;
-  content: string;
+  content: string | null;
   chat: { id: string; sender: "me" | "other"; message: string }[];
 };
 
