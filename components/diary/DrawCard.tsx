@@ -25,7 +25,7 @@ export function DrawCard({ diaryData }: { diaryData: DiaryItem[] }) {
   console.log(diaryData);
 
   const diary = diaryData[index];
-  const content = diary.content.split("\n");
+  const content = (diary.content ?? "").split("\n");
 
   useEffect(() => {
     if (!fade) {

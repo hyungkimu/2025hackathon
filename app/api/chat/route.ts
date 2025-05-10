@@ -1,5 +1,4 @@
 import { PROMPT } from "@/constants/prompt";
-import { Message, streamText } from "ai";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 
@@ -13,7 +12,7 @@ export async function POST(req: NextRequest) {
   const text = form.get("text")?.toString();
   const history = form.get("history")?.toString();
 
-  let messages: Message[] = [];
+  let messages = [];
 
   try {
     messages = JSON.parse(history || "[]");

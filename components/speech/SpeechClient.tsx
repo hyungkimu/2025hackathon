@@ -155,9 +155,6 @@ export default function SpeechClient({
 
       if (!isFinal) return;
       hasProcessedRef.current = true;
-
-      setStatus("responding");
-
       try {
         const chatForm = new FormData();
         chatForm.append("text", finalText);
