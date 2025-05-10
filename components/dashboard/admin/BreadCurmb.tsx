@@ -19,7 +19,7 @@ export function BreadcrumbDemo() {
     <Breadcrumb className="text-white text-lg">
       <BreadcrumbList className="text-white">
         <BreadcrumbItem>
-          <BreadcrumbLink href="/" className="text-white">
+          <BreadcrumbLink href="/manager" className="text-white">
             Home
           </BreadcrumbLink>
         </BreadcrumbItem>

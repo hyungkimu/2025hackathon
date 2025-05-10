@@ -35,7 +35,7 @@ export const userlogin = async (_: any, formData: FormData) => {
       email: "",
     });
 
-    redirect(`./diary/${existingUser.id}`);
+    return { success: true, userId: id };
   } catch (err) {
     console.error(err);
     return { errorMessage: "로그인 중 문제가 발생했습니다." };

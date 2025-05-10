@@ -43,8 +43,5 @@ export async function POST(req: NextRequest) {
       fullText += delta;
     }
   }
-
-  console.log(fullText);
-
   return NextResponse.json({ result: fullText });
 }

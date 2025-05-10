@@ -4,6 +4,7 @@ import { eq } from "drizzle-orm";
 import { getOrCreateDiaryId } from "@/data/diary";
 import SpeechClient from "@/components/speech/SpeechClient";
 import db from "@/db";
+import { useEffect } from "react";
 
 export default async function SpeechPage() {
   const session = await verifySession();
@@ -20,7 +21,6 @@ export default async function SpeechPage() {
     throw new Error("해당 어르신 정보를 찾을 수 없습니다.");
   }
 
-  const diaryId = await getOrCreateDiaryId(seniorInfo.id); // ✅ UUID 사용
-
-  return <SpeechClient userId={session.id} diaryId={diaryId} />;
+  let diaryId = await getOrCreateDiaryId(seniorInfo.id);
+  return <SpeechClient userId={session.id} DiaryId={diaryId} />;
 }

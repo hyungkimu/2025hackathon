@@ -65,6 +65,7 @@ export default async function DiaryPage({
 
   const cardData = {
     id: diaryEntry.id,
+    userId: params.id,
     date: format(new Date(diaryEntry.createdAt), "yyyy-MM-dd"),
     title: diaryEntry.title || "",
     image_url: diaryEntry.imageUrl || "/diary.jpg",

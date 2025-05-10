@@ -64,3 +64,13 @@ export const ManagerInsertSchema = z.object({
   }),
   elderadress: z.string().min(1, { message: "주소를 입력해주세요." }),
 });
+
+export const AdminEditSchema = z.object({
+  name: z
+    .string()
+    .min(1, { message: "이름을 입력해주세요." })
+    .regex(/^[a-zA-Zㄱ-ㅎ가-힣]+$/, {
+      message: "이름은 문자만 입력할 수 있습니다.",
+    }),
+  email: z.string().email("유효한 이메일을 입력하세요"),
+});

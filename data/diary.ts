@@ -27,6 +27,8 @@ export async function getDiary(seniorId: string, date?: string) {
 export async function getOrCreateDiaryId(seniorId: string): Promise<string> {
   const today = getTodayDate();
 
+  console.log(today);
+
   const existing = await db.query.diary.findFirst({
     where: and(eq(diary.seniorId, seniorId), eq(diary.createdAt, today)),
   });

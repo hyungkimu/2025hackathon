@@ -21,7 +21,7 @@ export default function Dashboard({ user, availableDates }: Props) {
     <div>
       <div className="flex justify-center mt-6">
         <Card className="max-w-5xl w-full flex justify-between p-4 bg-[#e9ae38] items-center">
-          <img src="/cho.png" className="w-20 h-20 mr-4" alt="Logo" />
+          <img src="/cho.png" className="w-40 mr-4" alt="Logo" />
           <BreadcrumbDemo />
           <MyLogoutButton />
         </Card>

@@ -19,7 +19,6 @@ export async function POST(req: NextRequest) {
       { status: 400 }
     );
   }
-  console.log("aaa");
 
   const imagePrompt = `
     A warm, crayon-style drawing of a Korean elderly person's day: ${spokenSummary}. 
@@ -27,8 +26,6 @@ export async function POST(req: NextRequest) {
     Soft pastel tones, hand-drawn look with colored pencil or crayon texture. 
     Cozy, childlike diary-style illustration. No text, only the drawing.
   `;
-  console.log("Ddd");
-
   const image = await openai.images.generate({
     model: "dall-e-3",
     prompt: imagePrompt,
@@ -40,26 +37,14 @@ export async function POST(req: NextRequest) {
 
   console.log(imageUrl);
 
+  console.log(spokenSummary);
+
   // 1. DB에 이미지 URL 저장
   await db
     .update(diary)
     .set({ imageUrl, content: spokenSummary })
     .where(eq(diary.id, diaryId));
 
-  // 2. 확인용 조회
-  const updatedDiary = await db.query.diary.findFirst({
-    where: eq(diary.id, diaryId),
-    columns: { createdAt: true },
-  });
-
-  if (!updatedDiary?.createdAt) {
-    return NextResponse.json(
-      { error: "업데이트 후 조회 실패" },
-      { status: 500 }
-    );
-  }
-
   // 3. 날짜 경로로 리다이렉트
-  const dateStr = format(new Date(createdAt), "yyyy-MM-dd");
-  return;
+  return NextResponse.json({ success: true /*, imageUrl */ });
 }

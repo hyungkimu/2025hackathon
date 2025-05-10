@@ -12,8 +12,10 @@ import { UserLoginSchema } from "@/schemas/auth";
 import { login } from "@/actions/login";
 import { UserFormCard } from "./UserFormCard";
 import { userlogin } from "@/actions/userlogin";
+import { useRouter } from "next/navigation";
 
 export function UserLoginForm() {
+  const router = useRouter();
   const [error, action] = useFormState(userlogin, undefined);
   const { errors, validateField } =
     useFormValidate<TUserLoginFormError>(UserLoginSchema);
@@ -23,7 +25,9 @@ export function UserLoginForm() {
   };
 
   useEffect(() => {
-    if (error?.errorMessage) {
+    if (error?.success) {
+      router.push(`/diary/${error.userId}`);
+    } else if (error?.errorMessage) {
       toast.error(error.errorMessage);
     }
   }, [error]);

@@ -5,9 +5,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export type DiaryItem = {
   id: string;
+  userId: string;
   date: string;
   image_url: string;
   title: string;
@@ -16,6 +18,7 @@ export type DiaryItem = {
 };
 
 export function DrawCard({ diaryData }: { diaryData: DiaryItem[] }) {
+  const router = useRouter(); // 라우터 사용
   const [index, setIndex] = useState(0);
   const [fade, setFade] = useState(true);
 
@@ -58,10 +61,16 @@ export function DrawCard({ diaryData }: { diaryData: DiaryItem[] }) {
       >
         <TabsContent value="account">
           <Card className="border-2 border-gray-200">
-            <CardHeader>
+            <CardHeader className="relative">
               <CardTitle className="text-3xl text-center font-dagyeong">
                 {diary.date}
               </CardTitle>
+              <button
+                onClick={() => router.push(`/diary/${diaryData[0].userId}`)} // 이동할 경로 설정
+                className="absolute top-0 left-1.5 mt-2 mr-2 px-3 py-1 text-sm rounded-md border bg-white hover:bg-gray-100"
+              >
+                전체 목록
+              </button>
               <div className="w-full aspect-square relative rounded overflow-hidden mt-4">
                 <Image
                   src={diary.image_url}

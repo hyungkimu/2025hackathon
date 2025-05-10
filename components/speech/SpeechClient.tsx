@@ -13,7 +13,8 @@ import surprisedAnim from "@/public/lotties/surprised.json";
 import angryAnim from "@/public/lotties/angry.json";
 import { useChatHistoryManager } from "@/hooks/useChatHistoryManager";
 import { redirect, useRouter } from "next/navigation";
-import { getDiary } from "@/data/diary";
+import { getDiary, getOrCreateDiaryId } from "@/data/diary";
+import { format } from "date-fns";
 
 type MicStatus =
   | "idle"
@@ -27,20 +28,20 @@ type MicStatus =
 
 export default function SpeechClient({
   userId,
-  diaryId,
+  DiaryId,
 }: {
   userId: string;
-  diaryId: string;
+  DiaryId: string;
 }) {
   const [transcript, setTranscript] = useState("");
   const [status, setStatus] = useState<MicStatus>("idle");
-  const { history, addMessages } = useChatHistoryManager(diaryId);
+  const { history, addMessages } = useChatHistoryManager(DiaryId);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const isRecordingRef = useRef(false);
   const hasProcessedRef = useRef(false);
   const lottieRef = useRef<any>(null);
   const router = useRouter();
-  const conversationId = "2";
+
   const handleDrawDiary = async () => {
     const ttsForm = new FormData();
     ttsForm.append(
@@ -58,9 +59,11 @@ export default function SpeechClient({
     audio.play();
 
     audio.onended = async () => {
+      console.log(DiaryId);
+
       try {
         const form = new FormData();
-        form.append("diaryId", diaryId);
+        form.append("diaryId", DiaryId);
         form.append("history", JSON.stringify(history));
 
         const res = await fetch("/api/diary/generate", {
@@ -69,19 +72,21 @@ export default function SpeechClient({
         });
 
         const { spokenSummary } = await res.json();
+        console.log(spokenSummary);
 
         const imageForm = new FormData();
         imageForm.append("spokenSummary", spokenSummary);
-        imageForm.append("diaryId", diaryId);
+        imageForm.append("diaryId", DiaryId);
         imageForm.append("userId", userId);
-        await fetch("/api/diary/image", {
+        const date = await fetch("/api/diary/image", {
           method: "POST",
           body: imageForm,
         });
 
         // 결과 페이지로 이동 (다이어리 날짜와 사용자 ID를 사용)
-        const router = useRouter();
         const dateStr = format(new Date(history[0].createdAt), "yyyy-MM-dd"); // 또는 서버에서 받은 날짜 사용
+
+        console.log(dateStr);
         router.push(`/diary/${userId}/${dateStr}`); // 날짜 경로로 리다이렉트
 
         // 결과 페이지로 이동 <<

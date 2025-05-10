@@ -14,11 +14,10 @@ export async function POST(req: NextRequest) {
   const historyRaw = form.get("history")?.toString();
 
   if (!diaryId) {
-    return NextResponse.json(
-      { error: "Missing conversationId" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Missing diaryId" }, { status: 400 });
   }
+
+  console.log(diaryId);
 
   if (!historyRaw) {
     return NextResponse.json({ error: "Missing history" }, { status: 400 });
@@ -35,6 +34,7 @@ export async function POST(req: NextRequest) {
   }
 
   console.log(history);
+  console.log(Array.isArray(history));
 
   if (!Array.isArray(history) || history.length === 0) {
     return NextResponse.json(
@@ -46,6 +46,8 @@ export async function POST(req: NextRequest) {
   const formatted = history
     .map((m) => `${m.role === "user" ? "어르신" : "미미"}: ${m.content}`)
     .join("\n");
+
+  console.log(formatted);
 
   const spokenRes = await openai.chat.completions.create({
     model: "gpt-4o",
@@ -65,7 +67,6 @@ export async function POST(req: NextRequest) {
     spokenRes.choices[0].message.content?.trim() ??
     "오늘은 조용하고 따뜻한 하루였어요.";
 
-  // ✅ 다이어리 존재 확인
   const existing = await db.query.diary.findFirst({
     where: eq(diary.id, diaryId),
   });
@@ -83,6 +84,7 @@ export async function POST(req: NextRequest) {
     risk: msg.risk ?? null,
   }));
 
+  console.log(spokenSummary);
   await db.insert(diaryMessage).values(messagesToInsert);
 
   return NextResponse.json({
