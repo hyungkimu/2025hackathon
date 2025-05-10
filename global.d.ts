@@ -1,13 +1,12 @@
 // global.d.ts
+export {};
 
-interface Window {
-  SpeechRecognition: SpeechRecognitionConstructor;
-  webkitSpeechRecognition: SpeechRecognitionConstructor;
+declare global {
+  interface Window {
+    webkitSpeechRecognition: any;
+    SpeechRecognition: any;
+  }
+
+  type SpeechRecognition = any;
+  type SpeechRecognitionEvent = any;
 }
-
-type SpeechRecognitionConstructor = new () => SpeechRecognition;
-
-type SpeechRecognitionEvent = Event & {
-  resultIndex: number;
-  results: SpeechRecognitionResultList;
-};
