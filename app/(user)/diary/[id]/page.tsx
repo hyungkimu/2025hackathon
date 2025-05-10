@@ -46,7 +46,7 @@ export default async function DashboardPage({
   });
 
   const availableDates = diaries
-    .filter((d) => d.createdAt)
+    .filter((d): d is { createdAt: string } => d.createdAt !== null) // 타입 좁히기
     .map((d) => new Date(d.createdAt).toISOString().slice(0, 10));
 
   return <Dashboard user={user} availableDates={availableDates} />;
