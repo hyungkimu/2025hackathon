@@ -5,7 +5,10 @@ import { readFile } from "fs/promises";
 import path from "path";
 
 // 서비스 계정 키 경로
-const keyPath = path.join(process.cwd(), process.env.GOOGLE_APPLICATION_CREDENTIALS || "");
+const keyPath = path.join(
+  process.cwd(),
+  process.env.GOOGLE_APPLICATION_CREDENTIALS || ""
+);
 
 export async function POST(req: NextRequest) {
   const form = await req.formData();
@@ -15,10 +18,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "텍스트 없음" }, { status: 400 });
   }
 
-  console.log(text);
-
-  // 클라이언트 설정
-  const client = new textToSpeech.TextToSpeechClient({
+  const client = new (textToSpeech.TextToSpeechClient as any)({
     keyFilename: keyPath,
   });
 
